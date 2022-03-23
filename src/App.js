@@ -5,12 +5,16 @@ import MemeState from "./context/MemeContext";
 
 const App = () => {
   return (
-    <MemeState>
-      <h1>Meme Generator</h1>
-      <TemplateSelector />
-      <CurrentTemplate />
-      <Editor />
-    </MemeState>
+    <div className="container">
+      <h1 className="text-center">Meme Generator</h1>
+      <MemeState>
+        <div className="row">
+          <TemplateSelector />
+          <CurrentTemplate />
+          <Editor />
+        </div>
+      </MemeState>
+    </div>
   );
 };
 
