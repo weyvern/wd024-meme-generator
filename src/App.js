@@ -1,8 +1,16 @@
+import TemplateSelector from "./components/TemplateSelector";
+import CurrentTemplate from "./components/CurrentTemplate";
+import Editor from "./components/Editor";
+import MemeState from "./context/MemeContext";
+
 const App = () => {
   return (
-    <div>
+    <MemeState>
       <h1>Meme Generator</h1>
-    </div>
+      <TemplateSelector />
+      <CurrentTemplate />
+      <Editor />
+    </MemeState>
   );
 };
 
