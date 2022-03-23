@@ -19,7 +19,7 @@ const MemeState = ({ children }) => {
     setInputs(Array(template.box_count).fill(""));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
 
@@ -31,14 +31,17 @@ const MemeState = ({ children }) => {
       formData.append(`boxes[${index}][text]`, input)
     );
 
-    fetch("https://api.imgflip.com/caption_image", {
-      method: "POST",
-      body: formData
-    })
-      .then((res) => res.json())
-      .then(({ data }) => {
-        setSelectedTemplate((prev) => ({ ...prev, url: data.url }));
+    try {
+      const res = await fetch("https://api.imgflip.com/caption_image", {
+        method: "POST",
+        body: formData
       });
+      const { data } = await res.json();
+      setSelectedTemplate((prev) => ({ ...prev, url: data.url }));
+      setInputs(Array(selectedTemplate.box_count).fill(""));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
